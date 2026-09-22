@@ -145,8 +145,11 @@ jobs:
             A14+15)
               jq_filter="map(select(.os_version == \"A14\" or .os_version == \"A15\"))"
               ;;
-            A16)
-              jq_filter="map(select(.os_version == \"A16\"))"
+                        A16)
+              jq_filter="map(select(.model == \"OP15\" and .os_version == \"A16\" and .android_version == \"android16\" and .kernel_version == \"6.12\"))"
+              ;;
+            A15)
+              jq_filter="map(select(.os_version == \"A15\"))"
               ;;
             A15)
               jq_filter="map(select(.os_version == \"A15\"))"
