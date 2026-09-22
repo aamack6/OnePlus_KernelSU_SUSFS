@@ -864,8 +864,7 @@ runs:
             git clone "https://gitlab.com/simonpunk/susfs4ksu.git" susfs4ksu
             git -C susfs4ksu checkout "$SUSFS_BRANCH"
           fi
-          echo "SUSFS_COMMIT_SHA=$SUSFS_BRANCH" >> $GITHUB_ENV
-        fi
+        echo "SUSFS_COMMIT_SHA=$SUSFS_BRANCH" >> $GITHUB_ENV
         echo "✅ Dependencies cloned"
         echo "::endgroup::"
 
