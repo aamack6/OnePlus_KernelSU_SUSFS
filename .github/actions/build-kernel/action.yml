@@ -856,12 +856,14 @@ runs:
         
         retry_clone "https://github.com/WildKernels/kernel_patches.git" "main" "1"
         
-        if ! retry_fetch_archive "https://gitlab.com/simonpunk/susfs4ksu.git" "$SUSFS_BRANCH"; then
-          echo "Archive fetch failed, falling back to full git clone..."
-          rm -rf susfs4ksu
-          git clone "https://gitlab.com/simonpunk/susfs4ksu.git" susfs4ksu
-          git -C susfs4ksu checkout "$SUSFS_BRANCH"
-        fi
+        if [ "${{ env.OP_SUSFS }}" = true ]; then
+          echo "Using SUSFS branch/commit: $SUSFS_BRANCH"
+          if ! retry_fetch_archive "https://gitlab.com/simonpunk/susfs4ksu.git" "$SUSFS_BRANCH"; then
+            echo "Archive fetch failed, falling back to full git clone..."
+            rm -rf susfs4ksu
+            git clone "https://gitlab.com/simonpunk/susfs4ksu.git" susfs4ksu
+            git -C susfs4ksu checkout "$SUSFS_BRANCH"
+          fi
           echo "SUSFS_COMMIT_SHA=$SUSFS_BRANCH" >> $GITHUB_ENV
         fi
         echo "✅ Dependencies cloned"
